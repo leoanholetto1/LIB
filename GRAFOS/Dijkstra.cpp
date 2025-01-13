@@ -22,3 +22,22 @@ void dijkstra(int S){
         }
     }
 }
+//Mais rapido
+void dijkstra(int start, int n) {
+    dist[start] = 0;
+    set<pair<int, int>> pq;
+    pq.insert({0, start});
+
+    while (!pq.empty()) {
+        auto [d, u] = *pq.begin();
+        pq.erase(pq.begin());
+
+        for (auto [v, w] : graph[u]) {
+            if (dist[u] + w < dist[v]) {
+                if(pq.count({dist[v], v})) pq.erase({dist[v], v});
+                dist[v] = dist[u] + w;
+                pq.insert({dist[v], v});
+            }
+        }
+    }
+}

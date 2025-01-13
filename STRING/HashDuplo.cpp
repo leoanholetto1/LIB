@@ -2,6 +2,14 @@ mt19937 rng((int) chrono::steady_clock::now().time_since_epoch().count()); // Ra
 static long long P = uniform_int_distribution<int>(356, M1 - 1)(rng); // In case TL, use const
 // Remember (alfabet < base < mod)
 //Other large primes: 1000041323, 100663319, 201326611 , 1000015553, 1000028537
+vector<int> bases = {37,61,79,83,97,53,61,
+                         107,127,137,163,191 ,
+                         199,211,229,239,263 ,
+                         271,281,293 };      
+vector<int> mods = {1000000007, 1000000009, 1000000433, 1000001329, 1000001927,
+                    1000003051, 1000003253, 1000003397, 1000003579, 1000003751,
+                    1000003793, 1000002043, 1000003967, 1000003987, 1000004123,
+                    1000004843, 1000006129, 1000006961, 1000012253, 1000015271};
 class Hashing {
 private:
     const ll P = 31;

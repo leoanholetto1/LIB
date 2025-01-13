@@ -1,6 +1,9 @@
 //Complexidade: O(log n)
 //Fib(Fib(n)) mod m  = Fib(Fib(n) mod Pisano(m) ) mod m
-ll descobre(ll m){
+//F(i)%mod = F(i)%pi(mod)
+//Existe um resto zero até 6*n
+//pi(n) <= 6*n
+ll pisano(ll m){
     ll a = 1;
     ll b = 1;
     ll ans = 1;

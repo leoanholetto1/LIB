@@ -1,4 +1,4 @@
-int vert;
+int vert,maior;
 //Complexidade: O(n)
 void dfs(int v,int d,int pai){
     if(d > maior ){

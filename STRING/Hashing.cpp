@@ -1,3 +1,4 @@
+//Probabilidade: 1 - exp(-n*(n-1)/(2*d))
 class Hashing {
 private:
     const ll P = 69420;
