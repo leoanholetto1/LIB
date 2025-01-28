@@ -20,7 +20,7 @@ while(i<=f){
     else f = m-1; 
 }
 //Bisection
-for(int i=0;i<n;i++){
+for(int j=0;j<n;j++){
     double m = (i+f)/2.0;
     if(val(m)) f = m;
     else i = m;
@@ -29,8 +29,8 @@ for(int i=0;i<n;i++){
 int i=0,f=1e9,ans,m;
 while(i<=f){
     m = (i+f)/2;
-    if(val(m)){
-        ans = m;//depende se quiser o min ou o max
+    if(val(m)){//depende se quiser o min ou o max
+        ans = m;
         f = m-1;
     }
     else i = m+1;

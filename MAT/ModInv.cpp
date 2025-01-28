@@ -18,17 +18,18 @@ ll modInverse(ll A, ll M){
 }
 
 //Se M for primo
-int power(int x, unsigned int y, unsigned int M){
+ll power(ll x, ll y,ll M){
     if (y == 0)
         return 1;
     int p = power(x, y / 2, M) % M;
     p = (p * p) % M;
     return (y % 2 == 0) ? p : (x * p) % M;
 }
-void modInverse(int A, int M){
+
+void modInverse(ll A, ll M){
     int g = gcd(A, M);
     if (g != 1)
-        cout << "Inverse doesn't exist";
+        cout << "-1";
     else {
         cout <<  power(A, M - 2, M);
     }
