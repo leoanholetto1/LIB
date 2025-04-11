@@ -1,3 +1,5 @@
+//Probabilidade: Pr(H > 2*c*ln(N)) < N*(N/e)^-(c*ln(c/e))
+
 struct node {
     node *left, *right;
     int weight, size;

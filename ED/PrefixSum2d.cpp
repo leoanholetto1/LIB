@@ -7,5 +7,5 @@ for(int a=1;a<=n;a++){
 }
 //Complexidade: O(1)
 int query(int x1,int y1,int x2,int y2){
-    return dp[y2][x2]+ dp[y1-1][x1-1] - dp[y2][x1-1] - dp[y1-1][x2]
+    return dp[y2][x2]+ dp[y1-1][x1-1] - dp[y2][x1-1] - dp[y1-1][x2];
 }

@@ -1,4 +1,6 @@
 //Complexidade: O(n^3)
+//Obeservação muito importante mesmo: Se n > m, inverta
+//Para maximizar inverta os pesos
 int A[205][205];
 void hungarian(int n,int m){
 	vector<int> u (n+1), v (m+1), p (m+1), way (m+1);

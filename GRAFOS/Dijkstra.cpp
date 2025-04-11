@@ -1,7 +1,6 @@
 //Complexidade: O(n*log n + m*log n)
-int dist[maxn];
-bool mark[maxn];
-vector<pii> grafo[maxn];
+int dist[maxN];
+vector<pii> grafo[maxN];
 void dijkstra(int S){
     for (int i = 0; i <= n; i++)
         dist[i] = INF;

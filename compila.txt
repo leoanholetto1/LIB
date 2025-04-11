@@ -1,0 +1,8 @@
+Powershell:
+g++ uri.cpp -o uri
+Get-Content ent.txt | ./uri
+Cmd:
+g++ uri.cpp -o uri
+uri < ent.txt (exibe na tela)
+uri < ent.txt > saida.txt (salva)
+fc saidaEsperada.txt saida.txt
