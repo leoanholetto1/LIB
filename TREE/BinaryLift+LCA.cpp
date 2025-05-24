@@ -14,7 +14,7 @@ void binary(int u,int p){
         pai[u][i] = pai[pai[u][i-1]][i-1];
         distMax[u][i] = min(distMax[u][i-1],distMax[pai[u][i-1]][i-1]);
     }
-     for(auto adj: tree[u]){
+    for(auto adj: tree[u]){
         if(adj.f==p) continue;
         binary(adj.f, u);
     }

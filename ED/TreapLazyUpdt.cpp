@@ -1,3 +1,5 @@
+//mudar
+
 struct node {
     node *left, *right;
     int weight, size,flip,mn;
