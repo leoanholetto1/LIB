@@ -9,75 +9,68 @@ bool primo(ll n){
 //Miler Rabin
 //Complexidade: O(k x log n)
 //Probabilidade: 1 - (1/4)^k
-int power(int x, unsigned int y, int p){
-    int res = 1;
-    x = x % p; 
-    while (y > 0){
-        if (y & 1)
-            res = (res*x) % p;
-        y = y>>1; 
-        x = (x*x) % p;
+using u64 = unsigned long long;
+using u128 = __uint128_t;
+
+u64 binpower(u64 base, u64 e, u64 mod) {
+    u64 result = 1;
+    base %= mod;
+    while (e) {
+        if (e & 1)
+            result = (u128)result * base % mod;
+        base = (u128)base * base % mod;
+        e >>= 1;
     }
-    return res;
-}
- 
-bool miillerTest(int d, int n){
-    int a = 2 + rand() % (n - 4);
-    int x = power(a, d, n);
-    if (x == 1  || x == n-1)
-       return true;
-    while (d != n-1){
-        x = (x * x) % n;
-        d *= 2;
-        if (x == 1)      return false;
-        if (x == n-1)    return true;
-    }
-    return false;
-}
- 
-// It returns false if n is composite and returns true if n
-// is probably prime.  k is an input parameter that determines
-// accuracy level. Higher value of k indicates more accuracy.
-bool isPrime(int n, int k){
-    if (n <= 1 || n == 4)  return false;
-    if (n <= 3) return true;
-    int d = n - 1;
-    while (d % 2 == 0)
-        d /= 2;
-    for (int i = 0; i < k; i++)
-         if (!miillerTest(d, n))
-              return false;
-    return true;
+    return result;
 }
 
-//Miler Rabin Deterministico n < 2^64
-//Complexidade: O(k x log n)
-bool check_composite(ll n, ll a, ll d, int s) {
-    ll x = power(a, d, n);
+bool check_composite(u64 n, u64 a, u64 d, int s) {
+    u64 x = binpower(a, d, n);
     if (x == 1 || x == n - 1)
         return false;
-    for (int r = 1; r < s; ++r) {
-        x = mulmod(x, x, n);
+    for (int r = 1; r < s; r++) {
+        x = (u128)x * x % n;
         if (x == n - 1)
+            return false;
+    }
+    return true;
+};
+
+bool MillerRabin(u64 n, int iter=5) { // returns true if n is probably prime, else returns false.
+    if (n < 4)
+        return n == 2 || n == 3;
+
+    int s = 0;
+    u64 d = n - 1;
+    while ((d & 1) == 0) {
+        d >>= 1;
+        s++;
+    }
+
+    for (int i = 0; i < iter; i++) {
+        int a = 2 + rand() % (n - 3);
+        if (check_composite(n, a, d, s))
             return false;
     }
     return true;
 }
 
-bool is_prime(u64 n) {
+//deterministico
+bool MillerRabin(u64 n) { // returns true if n is prime, else returns false.
     if (n < 2)
         return false;
-    int s = 0;
-    ll d = n - 1;
+
+    int r = 0;
+    u64 d = n - 1;
     while ((d & 1) == 0) {
         d >>= 1;
-        ++s;
+        r++;
     }
-    vector<ll> bases = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
-    for (ll a : bases) {
-        if (a >= n)
-            break;
-        if (check_composite(n, a, d, s))
+
+    for (int a : {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37}) {
+        if (n == a)
+            return true;
+        if (check_composite(n, a, d, r))
             return false;
     }
     return true;

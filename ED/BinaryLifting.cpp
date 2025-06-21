@@ -1,18 +1,18 @@
 //Complexidade: O(n x log n)
-int pai[maxN][32]; 
-void preprocess(int n){
-    for(int i = 1; i <= 30; i++){
-        for(int u=0;u<n;u++){
-            pai[u][i] = pai[pai[u][i-1]][i-1];
-        }
+int succ[maxN][20]; 
+for (int i = 1; i <=20; i++) {
+    for (int j = 1; j <=n; j++) {
+        succ[j][i] = succ[succ[j][i-1]][i-1];
     }
 }
 //Complexidade: O(log n)
-int query(int a,int b){
-    for(int i=30;i>=0;i--){
-        if(b&(1<<i)){
-            a = pai[a][i];
-        }
+int lift(int x, int d) {
+    int i = 0;
+    while(d > 0) {
+        if (d&1) 
+            x = succ[x][i];
+        d>>=1;
+        i++;
     }
-    return a;
+    return x;
 }

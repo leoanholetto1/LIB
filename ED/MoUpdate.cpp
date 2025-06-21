@@ -1,4 +1,4 @@
-//Complexidade: O(cqrt(n^2))
+//Complexidade: O(q*cqrt(n^2))
 int B;
 struct qry{
     int l,r,time,ix,w;

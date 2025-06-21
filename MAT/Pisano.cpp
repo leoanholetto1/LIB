@@ -17,6 +17,37 @@ ll pisano(ll m){
     }
 }
 
+ll pisano_period_prime(ll p) {
+  if (p == 2) return 3;
+  if (p == 5) return 20;
+  ll x = p % 5 == 1 or p % 5 == 4 ? p - 1 : 2 * p + 2;
+  auto v = PollardRho::factorize(x);
+  map<ll, int> mp;
+  for (auto x: v) {
+    mp[x]++;
+  }
+  vector<ll> d;
+  d.push_back(1);
+  for (auto [p, e]: mp) {
+    ll cur = 1;
+    int sz = d.size();
+    for (int i = 0; i < e; i++) {
+      cur *= p;
+      for (int j = 0; j < sz; j++) {
+        d.push_back(d[j] * cur);
+      }
+    }
+  }
+  sort(d.begin(), d.end());
+  for (auto x: d) {
+    if (fib(x, p) == 0 and fib(x + 1, p) == 1) {
+      return x;
+    }
+  }
+  assert(0);
+  return -1;
+}
+
 ll fib(ll n, ll mod) {
     if (n <= 1) return n;
     ll a = 0;
