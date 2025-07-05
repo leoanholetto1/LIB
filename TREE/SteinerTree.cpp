@@ -1,6 +1,12 @@
+// dado um grafo, com peso nas arestas
+// e um subconjunto de vertices
+// queremos achar uma arvore de menor peso que contenha todos os vertices do subconjunto
+// mas essa arvore pode conter tambem outros vertices que nao estao no subconjunto
+// minimizando o peso total das arestas da arvore
 //Complexidade: O(2^k * n^2 + 3^k * N)
 //Find the steiner tree, where nodes from 0,k-1 are terminals
 //dist[i][j] has the distance between the nodes (floyd wharshall?)
+
 for(int i=k;i<n;i++){
     for(int j=0;j<k;j++){
         dp[i-k][(1<<j)] = dist[i][j];

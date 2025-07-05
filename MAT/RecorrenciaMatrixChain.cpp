@@ -40,8 +40,8 @@ long long fib(long long n){
 	if(n==0) return 0;
     Matrix single(1);
     single = expo_power(single, n);
-	int arr[3][1] = {{0},{1},{1}};  // f(0),f(1),f(2)
-	int ans[3][1] = {{0}, {0}, {0}}; //f(n),(f+1),f(n+2)
+	ll arr[3][1] = {{0},{1},{1}};  // f(0),f(1),f(2)
+	ll ans[3][1] = {{0}, {0}, {0}}; //f(n),(f+1),f(n+2)
 	for(int i=0;i<3;i++){
 		for(int j=0;j<3;j++){
 			for(int k=0;k<1;k++){

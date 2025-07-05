@@ -56,3 +56,4 @@ struct QueryTree {
         return ans;
     }
 };
+

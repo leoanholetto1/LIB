@@ -1,19 +1,37 @@
 // Fast
-using ll = long long;
- 
-template<class T, int d>
+constexpr int d = 2;
+using T = double;
+
 struct pt {
     array<T, d> p;
-    bool operator!=(const pt &o) const { return p != o.p; }
-    T dist(const pt &o) const {
+
+    pt() {}
+    pt(T x, T y) {
+        p[0] = x;
+        p[1] = y;
+    }
+
+    bool operator!=(const pt &o) const {
+        return p != o.p;
+    }
+
+    //Manhattan
+    /*T dist(const pt &o) const {
         T res = 0;
-        for (int i = 0; i < d; i++)
+        for (int i = 0; i < d; ++i)
             res += abs(p[i] - o.p[i]);
         return res;
+    }*/
+
+    //Euclidiana
+    T dist(const pt &o) const {
+        T res = 0;
+        for (int i = 0; i < d; ++i)
+            res += (p[i] - o.p[i])*(p[i] - o.p[i]);
+        return  res;
     }
 };
 
-template<class pt, class T, int d>
 struct kd_tree {
     struct node {
         int ax;
@@ -23,14 +41,29 @@ struct kd_tree {
         array<T, d> min_bounds, max_bounds;
     };
     node *root;
- 
-    T minimal_distance(const pt &q, const array<T, d> &minb, const array<T, d> &maxb) {
+
+    //Manhattan
+    /*T minimal_distance(const pt &q, const array<T, d> &minb, const array<T, d> &maxb) {
         T dist = 0;
         for (int i = 0; i < d; i++) {
             if (q.p[i] < minb[i])
                 dist += minb[i] - q.p[i];
             else if (q.p[i] > maxb[i])
                 dist += q.p[i] - maxb[i];
+        }
+        return dist;
+    }*/
+
+    //Euclidiana
+    T minimal_distance(const pt &q, const array<T, d> &minb, const array<T, d> &maxb) {
+        T dist = 0;
+        for (int i = 0; i < d; i++) {
+            T delta = 0;
+            if (q.p[i] < minb[i])
+                delta = minb[i] - q.p[i];
+            else if (q.p[i] > maxb[i])
+                delta = q.p[i] - maxb[i];
+            dist += delta * delta;
         }
         return dist;
     }
@@ -118,6 +151,44 @@ struct kd_tree {
         query(root, q, ans);
         return ans;
     }
+
+	void k_nearest(node* cur, const pt& q, int k, std::priority_queue<T>& pq) {
+		if (cur == nullptr) return;
+
+		if (q != cur->point) {
+			T d_here = q.dist(cur->point);
+			if ((int)pq.size() < k) {
+				pq.push(d_here);
+			} else if (d_here < pq.top()) {
+				pq.pop();
+				pq.push(d_here);
+			}
+		}
+
+		vector<pair<T, node*>> children;
+		if (cur->izq) {
+			T d_left = minimal_distance(q, cur->izq->min_bounds, cur->izq->max_bounds);
+			children.push_back({d_left, cur->izq});
+		}
+		if (cur->der) {
+			T d_right = minimal_distance(q, cur->der->min_bounds, cur->der->max_bounds);
+			children.push_back({d_right, cur->der});
+		}
+
+		sort(children.begin(), children.end(), [](const auto& a, const auto& b) {
+			return a.first < b.first;
+		});
+
+		for (auto& [d_val, child] : children) {
+			if ((int)pq.size() < k || d_val < pq.top()) {
+				k_nearest(child, q, k, pq);
+			}
+		}
+	}
+
+	void k_nearest(const pt& q, int k, std::priority_queue<T> & pq) {
+		k_nearest(root, q, k, pq);
+	}
 };
 
 // KNN

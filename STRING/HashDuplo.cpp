@@ -1,3 +1,7 @@
+//Hash = hs.get_hash(i, j)
+//Hash string invertida = hs_inv.get_hash(n - j, n - i)
+
+
 mt19937 rng((int) chrono::steady_clock::now().time_since_epoch().count()); // Random number generator
 static long long P = uniform_int_distribution<int>(356, M1 - 1)(rng); // In case TL, use const
 // Remember (alfabet < base < mod)

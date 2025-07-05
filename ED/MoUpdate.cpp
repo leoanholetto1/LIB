@@ -1,4 +1,5 @@
 //Complexidade: O(q*cqrt(n^2))
+//B = (2∗n^2)^1/3
 int B;
 struct qry{
     int l,r,time,ix,w;
