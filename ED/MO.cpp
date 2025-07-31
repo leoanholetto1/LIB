@@ -44,7 +44,7 @@ vector<int> mo(vector<qry> qs) {
 void solve(){
     int n,q,k,a,b;
     cin>>n>>q;
-    B = 555;
+    B = 555;  //320
     for(int i=0;i<n;i++){
         cin>>k;
         v.pb(k);

@@ -1,4 +1,4 @@
-//Para maximo (-a,-b)
+//Para minimo (-a,-b)
 struct Line{
 	ll a,b;
 };

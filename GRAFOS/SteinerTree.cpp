@@ -6,6 +6,7 @@
 //Complexidade: O(2^k * n^2 + 3^k * N)
 //Find the steiner tree, where nodes from 0,k-1 are terminals
 //dist[i][j] has the distance between the nodes (floyd wharshall?)
+//Se por acaso não precisar passar por pontos fora dos k ogrigatorios, fazer  k = 0 no código
 
 for(int i=k;i<n;i++){
     for(int j=0;j<k;j++){
