@@ -1,6 +1,6 @@
 //FFT de bits
 //Pode ser usado para gerar todas somas xor de um array
-//Obs: As operações de bits podem represetnar operaçõs de conjunto
+//Obs: As operações de bits podem representar operaçõs de conjunto
 //Complexidade: O(n x logn)
 
 void fwht_or(vi &a) {
