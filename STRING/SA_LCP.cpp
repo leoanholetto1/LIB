@@ -2,6 +2,10 @@ ll sa[maxN],pos[maxN], tmp[maxN], lcp[maxN];
 ll gap, n;
 string s;
 
+//ra[i] = É a posição (o ranking) do sufixo que começa no índice i dentro do SA.
+//lcp[i] = É o tamanho do maior prefixo comum entre os sufixos sa[i] e sa[i+1].
+//sa[i] = posição na string original do i-ésimo menor sufixo.
+
 bool comp(ll x, ll y) {
     if(pos[x] != pos[y]){
         return pos[x] < pos[y];
