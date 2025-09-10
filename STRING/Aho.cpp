@@ -44,6 +44,7 @@ void build_aho(){
 				j = aho[j].ch[c];
 			}
 		}
+		//if(aho[aho[u].suf].term) aho[u].term = true; -> so usar em caso de passar os estados 
 		for(auto &[c,v]: aho[u].ch){
 			q.emplace(v,c);
 		}

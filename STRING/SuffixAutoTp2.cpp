@@ -1,4 +1,4 @@
-namespace sam {
+struct sam {
 	int cur, sz, len[2*MAX], link[2*MAX], acc[2*MAX];
 	int nxt[2*MAX][26];
 	//Complexidade: O(n)
@@ -49,14 +49,42 @@ namespace sam {
 		for (int j = 0; j < 26; j++) if (nxt[i][j]) x += paths(nxt[i][j]);
 		return x;
 	}
-	void kth_substring(int k, int at=0) { // k=1 : menor substring lexicog.
+	void kth_substring_distinta(int k, int at=0) { // k=1 : menor substring lexicog.
 		for (int i = 0; i < 26; i++) if (k and nxt[at][i]) {
 			if (paths(nxt[at][i]) >= k) {
 				cout << char('a'+i);
-				kth_substring(k-1, nxt[at][i]);
+				kth_substring_distinta(k-1, nxt[at][i]);
 				return;
 			}
 			k -= paths(nxt[at][i]);
 		}
+	}
+	ll calc(int i=0) {
+		auto& x = dp[i];
+		if (x) return x;
+		x = ctn[i];
+		for (int j = 0; j < 26; j++) if (nxt[i][j]) x += calc(nxt[i][j]);
+		return x;
+	}
+	void update_cnts(){
+		vi aux[sz];
+		for(int i = 0; i < sz; i++)
+			aux[len[i]].pb(i);
+		for(int i = sz-1; i >= 0; i--)
+			for(int u :aux[i])
+				if(linke[u] != -1)
+					ctn[linke[u]] += ctn[u];
+	}
+	void kth_substring_(ll k, int at=0) { 
+		if(k < 0) return ;
+		for (int i = 0; i < 26; i++) 
+			if (k and nxt[at][i]) {
+				if (dp[nxt[at][i]] >= k) {
+					cout << char('a'+i);
+					kth_substring(k-ctn[nxt[at][i]], nxt[at][i]);
+					return ;
+				}
+				k -= dp[nxt[at][i]];
+			}
 	}
 };

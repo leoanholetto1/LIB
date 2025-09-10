@@ -11,6 +11,7 @@ namespace PollardRho {
     ll res = x * y % m;
     return res;;
   }
+  //Complexidade: O(log n)
   inline ll pow_mod(ll x, ll n, ll m) {
     ll res = 1 % m;
     for (; n; n >>= 1) {
@@ -67,6 +68,7 @@ namespace PollardRho {
       if (t && (u = __gcd(u, n)) > 1 && u < n) return u;
     }
   }
+  //Complexidade: O(n^(1/4))
   vector<ll> factorize(ll n) {
     if (n == 1) return vector <ll>();
     if (miller_rabin(n)) return vector<ll> {n};

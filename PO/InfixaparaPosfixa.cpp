@@ -1,4 +1,4 @@
-//Complexidade: O(n)
+//Complexidade: O(1)
 int prec(char c) {
     if(c == '^')
         return 3;
@@ -9,7 +9,7 @@ int prec(char c) {
     else
         return -1;
 }
-
+//Complexidade: O(n)
 void infixToPostfix(string s) {
     stack<char> st; 
     string result;

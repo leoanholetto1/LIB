@@ -17,7 +17,7 @@ void precompute_mobius() {
     }
 }
 //contar quantida de numeros livre de quadrados
-//Complexidade: O(n)
+//Complexidade: O(sqrt(n))
 ll cont(ll n){
 	ll sum=0;
 	for(ll i=1;i*i<=n;i++){

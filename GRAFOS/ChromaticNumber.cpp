@@ -16,7 +16,7 @@ bool checkIndependent(int mask) {
     return true;
 }
 
-//Complexidade: O(2^n x n)
+//Complexidade: O(3^n)
 int chromaticNumber() {
     int size = 1 << n;
     isIndependent.assign(size, false);
