@@ -10,7 +10,7 @@ ll permToInt(const vi& v) {
 }
 
 // Converte a permutacao p para Lehmer Code(1-indexado)
-//Complexidade: O(n log n)
+//Complexidade: O(n^2)
 vector<int> permToLehmer(const vector<int>& p) {
     int n = p.size();
     vector<int> code(n, 0);
